@@ -22,6 +22,13 @@
 <body>
 <div class="container">
     <h2 class="alert alert-info">Meetup Registration</h2>
+    <?php
+    if(!empty($success_msg)){
+        echo '<p class="statusMsg">'.$success_msg.'</p>';
+    }elseif(!empty($error_msg)){
+        echo '<p class="statusMsg">'.$error_msg.'</p>';
+    }
+    ?>
     <form action="" method="post">
         <div class="form-group">
             <input type="text" class="form-control" name="name" placeholder="Name" required="" value="<?php echo !empty($user['name'])?$user['name']:''; ?>">

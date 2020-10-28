@@ -37,17 +37,6 @@ class Users extends CI_Controller
      */
     public function login()
     {
-        $data = array();
-        if($this->session->userdata('success_msg'))
-        {
-            $data['success_msg'] = $this->session->userdata('success_msg');
-            $this->session->unset_userdata('success_msg');
-        }
-        if($this->session->userdata('error_msg'))
-        {
-            $data['error_msg'] = $this->session->userdata('error_msg');
-            $this->session->unset_userdata('error_msg');
-        }
         if($this->input->post('loginSubmit'))
         {
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -75,7 +64,7 @@ class Users extends CI_Controller
         }
         //load the view
         $this->load->view('header');
-        $this->load->view('users/login', $data);
+        $this->load->view('users/login');
         $this->load->view('footer');
     }
     
@@ -86,19 +75,31 @@ class Users extends CI_Controller
     {
         $data = array();
         $userData = array();
+        $data = array();
+        if($this->session->userdata('success_msg'))
+        {
+            $data['success_msg'] = $this->session->userdata('success_msg');
+            $this->session->unset_userdata('success_msg');
+        }
+        if($this->session->userdata('error_msg'))
+        {
+            $data['error_msg'] = $this->session->userdata('error_msg');
+            $this->session->unset_userdata('error_msg');
+        }
         if($this->input->post('regisSubmit'))
         {
             $this->form_validation->set_rules('name', 'Name', 'required');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_email_check');
-            $this->form_validation->set_rules('password', 'password', 'required');
-            $this->form_validation->set_rules('conf_password', 'confirm password', 'required|matches[password]');
-
+            $this->form_validation->set_rules('dob', 'Date of Birth', 'required');
+            $this->form_validation->set_rules('profession', 'Profession', 'required');
+            $this->form_validation->set_rules('locality', 'Locality', 'required');
             $userData = array(
                 'name' => strip_tags($this->input->post('name')),
-                'email' => strip_tags($this->input->post('email')),
-                'password' => md5($this->input->post('password')),
-                'gender' => $this->input->post('gender'),
-                'phone' => strip_tags($this->input->post('phone'))
+                'age' => strip_tags($this->input->post('age')),
+                'dob' => $this->input->post('dob'),
+                'profession' => strip_tags($this->input->post('profession')),
+                'locality' => $this->input->post('locality'),
+                'guest_no' => strip_tags($this->input->post('guest_no')),
+                'address' => $this->input->post('address')
             );
 
             if($this->form_validation->run() == true)
@@ -106,8 +107,7 @@ class Users extends CI_Controller
                 $insert = $this->user->insert($userData);
                 if($insert)
                 {
-                    $this->session->set_userdata('success_msg', 'Your registration was successfully. Please login to your account.');
-                    redirect('users/login');
+                    $this->session->set_userdata('success_msg', 'Your registration was successfully.');
                 }
                 else
                 {
