@@ -7,6 +7,17 @@
   <link href="<?php echo base_url(); ?>assets/css/style.css" rel='stylesheet' type='text/css' />
   <script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
   <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready( function() {
+            $('#dob').change( function(){
+                var dob = $('#dob').val();
+                dob = new Date(dob);
+                var today = new Date();
+                var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
+                $('#age').val(age);
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="container">
@@ -17,11 +28,10 @@
           <?php echo form_error('name','<span class="help-block">','</span>'); ?>
         </div>
         <div class="form-group">
-          <input type="number" maximum="99" class="form-control" name="age" placeholder="Age" required="" value="<?php echo !empty($user['age'])?$user['age']:''; ?>">
-          <?php echo form_error('age','<span class="help-block">','</span>'); ?>
+          <input type="number" maximum="99" class="form-control" name="age" id="age" placeholder="Age" required="" value="<?php echo !empty($user['age'])?$user['age']:''; ?>" readonly>
         </div>
         <div class="form-group">
-          <input type="date" class="form-control" name="dob" placeholder="Date of Birth" required="" value="<?php echo !empty($user['dob'])?$user['dob']:''; ?>">
+          <input type="date" class="form-control" name="dob" placeholder="Date of Birth" id="dob" required="" value="<?php echo !empty($user['dob'])?$user['dob']:''; ?>">
           <?php echo form_error('dob','<span class="help-block">','</span>'); ?>
         </div>
         <div class="form-group">
