@@ -3,6 +3,7 @@ class User extends CI_Model{
 function __construct() 
 {
     $this->userTbl = 'user_details';
+    $this->adminTbl = 'admin_users';
 }
     /*
      * get rows from the users table
@@ -10,7 +11,7 @@ function __construct()
 function getRows($params = array())
 {
     $this->db->select('*');
-    $this->db->from($this->userTbl);
+    $this->db->from($this->adminTbl);
 
     //fetch data by conditions
     if(array_key_exists("conditions",$params))

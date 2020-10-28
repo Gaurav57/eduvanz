@@ -37,6 +37,7 @@ class Users extends CI_Controller
      */
     public function login()
     {
+        $data = [];
         if($this->input->post('loginSubmit'))
         {
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -45,9 +46,9 @@ class Users extends CI_Controller
             {
                 $con['returnType'] = 'single';
                 $con['conditions'] = array(
-                    'email'=>$this->input->post('email'),
+                    'user_email'=>$this->input->post('email'),
                     'password' => md5($this->input->post('password')),
-                    'status' => '1'
+                    'is_active' => '1'
                 );
                 $checkLogin = $this->user->getRows($con);
                 if($checkLogin)
@@ -64,7 +65,7 @@ class Users extends CI_Controller
         }
         //load the view
         $this->load->view('header');
-        $this->load->view('users/login');
+        $this->load->view('users/login',$data);
         $this->load->view('footer');
     }
     
@@ -107,7 +108,7 @@ class Users extends CI_Controller
                 $insert = $this->user->insert($userData);
                 if($insert)
                 {
-                    $this->session->set_userdata('success_msg', 'Your registration was successfully.');
+                    $this->session->set_userdata('success_msg', 'Your registration has been successfully.');
                 }
                 else
                 {
@@ -115,7 +116,7 @@ class Users extends CI_Controller
                 }
             }
         }
-        $data['user'] = $userData;
+        //$data['user'] = $userData;
         //load the view
         $this->load->view('header');
         $this->load->view('users/registration', $data);

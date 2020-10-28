@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-    <h2 class="alert alert-info">User Login</h2>
+    <h2 class="alert alert-info">Admin Login</h2>
     <?php
     if(!empty($success_msg)){
         echo '<p class="statusMsg">'.$success_msg.'</p>';
@@ -31,7 +31,6 @@
             <input type="submit" name="loginSubmit" class="btn btn-success" value="Submit"/>
         </div>
     </form>
-    <p class="footInfo">Don't have an account? <a href="<?php echo base_url(); ?>users/registration">Register here</a></p>
 </div>
 </body>
 </html>

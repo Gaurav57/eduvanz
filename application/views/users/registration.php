@@ -35,7 +35,7 @@
           <?php echo form_error('name','<span class="help-block">','</span>'); ?>
         </div>
         <div class="form-group">
-          <input type="number" maximum="99" class="form-control" name="age" id="age" placeholder="Age" required="" value="<?php echo !empty($user['age'])?$user['age']:''; ?>" readonly>
+          <input type="number" maxlength="99" class="form-control" name="age" id="age" placeholder="Age" required="" value="<?php echo !empty($user['age'])?$user['age']:''; ?>" readonly>
         </div>
         <div class="form-group">
           <input type="date" class="form-control" name="dob" placeholder="Date of Birth" id="dob" required="" value="<?php echo !empty($user['dob'])?$user['dob']:''; ?>">
@@ -62,7 +62,7 @@
         </div>
         
         <div class="form-group">
-            <input type="text" class="form-control" name="address" placeholder="Address" value="">
+            <input type="text" maxlength="50" class="form-control" name="address" placeholder="Address" value="">
             <span class="help-block">Maximum 50 characters allowed</span>
         </div>
 
