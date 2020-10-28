@@ -10,14 +10,31 @@
 </head>
 <body>
 <div class="container">
-    <h2>User Account</h2>
-    <h3>Welcome <?php echo $user['name']; ?>!</h3>
-    <div class="account-info">
-        <p><b>Name: </b><?php echo $user['name']; ?></p>
-        <p><b>Email: </b><?php echo $user['email']; ?></p>
-        <p><b>Phone: </b><?php echo $user['phone']; ?></p>
-        <p><b>Gender: </b><?php echo $user['gender']; ?></p>
-    </div>
+    <h2>Registered User List</h2>
+  <table class="table table-stripped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date of Birth</th>
+        <th>Profession</th>
+        <th>Locality</th>
+        <th>Guest</th>
+      </tr>
+    </thead>
+    <tbody>
+        <?php if(isset($user) && count($user) > 0) { 
+             foreach($user as $users) {
+        ?>
+      <tr>
+        <td><?php echo $users['name']?></td>
+        <td><?php echo $users['dob']?></td>
+        <td><?php echo $users['profession']?></td>
+        <td><?php echo $users['locality']?></td>
+        <td><?php echo $users['guest_no']?></td>
+      </tr>
+      <?php } } ?>
+    </tbody>
+  </table>
 </div>
 </body>
 </html>
